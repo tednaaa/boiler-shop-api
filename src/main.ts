@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as session from 'express-session';
 import * as passport from 'passport';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -17,6 +19,13 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+
+  const config = new DocumentBuilder()
+    .setTitle('Boiler Shop API')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, document);
 
   await app.listen(PORT);
 }
