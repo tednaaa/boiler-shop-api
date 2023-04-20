@@ -1,6 +1,7 @@
 # Init project
 
 > Check requirments in .tool-versions (asdf)
+
 > Create .env from example & install deps
 
 ```
