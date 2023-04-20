@@ -8,6 +8,7 @@ export class AuthService {
   constructor(private readonly usersService: UsersService) {}
 
   async validateUser(username: string, password: string) {
+    console.log(username); // lower cased
     const user = await this.usersService.findOne({ where: { username } });
 
     if (!user) {
