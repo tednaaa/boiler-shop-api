@@ -6,7 +6,7 @@ import * as passport from 'passport';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const PORT = 3000;
+  const PORT = 8080;
 
   const app = await NestFactory.create(AppModule);
 
