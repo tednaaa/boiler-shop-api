@@ -42,7 +42,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   @Header('Content-Type', 'application/json')
   login(@Request() request) {
-    return { user: request.user, message: 'Logged in' };
+    return { user: request.user, message: 'Logged In' };
   }
 
   @ApiOkResponse({ type: LoginCheckResponse })
@@ -55,7 +55,6 @@ export class UsersController {
 
   @ApiOkResponse({ type: LogoutUserResponse })
   @Get('/logout')
-  @UseGuards(AuthenticatedGuard)
   @Header('Content-Type', 'application/json')
   logout(@Request() request) {
     request.session.destroy();

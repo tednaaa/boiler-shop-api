@@ -22,7 +22,7 @@ export class LoginUserResponse {
     email: string;
   };
 
-  @ApiProperty({ example: 'Logged in' })
+  @ApiProperty({ example: 'Logged In' })
   message: string;
 }
 
