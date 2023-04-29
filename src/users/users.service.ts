@@ -4,44 +4,26 @@ import { InjectModel } from '@nestjs/sequelize';
 
 import { User } from './users.model';
 import { CreateUserDto } from './dto/create-user.dto';
+import { FindOptions } from 'sequelize';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User)
-    private userModel: typeof User,
+    private readonly userModel: typeof User,
   ) {}
 
-  findOne(filter: {
-    where: { id?: string; username?: string; email?: string };
-  }): Promise<User> {
-    return this.userModel.findOne(filter);
+  findOne(options: FindOptions<User>): Promise<User> {
+    return this.userModel.findOne(options);
   }
 
-  async create(
-    createUserDto: CreateUserDto,
-  ): Promise<User | { warningMessage: string }> {
-    const existingByUsername = await this.userModel.findOne({
-      where: { username: createUserDto.username },
-    });
-    const existingByEmail = await this.userModel.findOne({
-      where: { email: createUserDto.email },
-    });
-
-    if (existingByUsername) {
-      return { warningMessage: 'Пользователь с таким именем уже существует' };
-    }
-    if (existingByEmail) {
-      return { warningMessage: 'Пользователь с таким email уже существует' };
-    }
-
-    const user = new User();
+  async create(createUserDto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
-    user.username = createUserDto.username;
-    user.email = createUserDto.email;
-    user.password = hashedPassword;
-
-    return user.save();
+    return this.userModel.create({
+      username: createUserDto.username,
+      email: createUserDto.email,
+      password: hashedPassword,
+    });
   }
 }
