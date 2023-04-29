@@ -2,7 +2,7 @@
 
 > Check requirments in .tool-versions (asdf)
 
-> Create .env from example & install deps
+> Create .env from example & install dependencies
 
 ```
 cp .env.example .env
@@ -13,4 +13,11 @@ npm install
 
 ```
 pg_ctl start
+```
+
+> Running migrations & seeds
+
+```
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
 ```

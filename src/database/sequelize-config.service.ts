@@ -12,9 +12,8 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
 
   createSequelizeOptions(): SequelizeModuleOptions {
-    const {
-      sql: { dialect, logging, host, port, username, password, database },
-    } = this.configService.get('database');
+    const { dialect, logging, host, port, username, password, database } =
+      this.configService.get('database');
 
     return {
       dialect,
