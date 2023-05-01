@@ -24,13 +24,11 @@ describe('IsUserAlreadyExistUsername', () => {
         return createMock<typeof User>({
           findOne: jest
             .fn()
-            .mockImplementation(
-              (options: FindOptions<User<{ username: string }>>) => {
-                if (options.where.username === 'already-exists-username') {
-                  return createMock<User>();
-                }
-              },
-            ),
+            .mockImplementation((options: { where: { username: string } }) => {
+              if (options.where.username === 'already-exists-username') {
+                return createMock<User>();
+              }
+            }),
         });
       })
       .compile();
