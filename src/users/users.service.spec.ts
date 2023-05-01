@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { createMock } from '@golevelup/ts-jest';
 import { getModelToken } from '@nestjs/sequelize';
 
 import { CreateUserDto } from './dto/create-user.dto';

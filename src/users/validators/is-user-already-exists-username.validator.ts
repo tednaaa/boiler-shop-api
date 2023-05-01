@@ -3,9 +3,9 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
+import { InjectModel } from '@nestjs/sequelize';
 
 import { User } from '../users.model';
-import { InjectModel } from '@nestjs/sequelize';
 
 @ValidatorConstraint({ async: true })
 @Injectable()

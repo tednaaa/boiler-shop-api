@@ -13,8 +13,8 @@ export class UsersService {
     private readonly userModel: typeof User,
   ) {}
 
-  findOne(options: FindOptions<User>): Promise<User> {
-    return this.userModel.findOne(options);
+  findOne({ where }: FindOptions<User>): Promise<User> {
+    return this.userModel.findOne({ where });
   }
 
   async create(createUserDto: CreateUserDto) {
