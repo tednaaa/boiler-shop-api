@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
 
-import { AuthenticatedGuard } from '../auth/authenticated.guard';
+import { AuthenticatedGuard } from '../auth/guards/authenticated.guard';
 
 import { ShoppingCartService } from './shopping-cart.service';
 import { AddToCartDto } from './dto/add-to-cart.dto';

@@ -1,16 +1,14 @@
 import { Module } from '@nestjs/common';
 
-import { DatabaseModule } from './database/database.module';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { BoilerPartsModule } from './boiler-parts/boiler-parts.module';
-import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
-import { PaymentModule } from './payment/payment.module';
+import { DatabaseModule } from '@/modules/database/database.module';
+import { AuthModule } from '@/modules/auth/auth.module';
+import { BoilerPartsModule } from '@/modules/boiler-parts/boiler-parts.module';
+import { ShoppingCartModule } from '@/modules/shopping-cart/shopping-cart.module';
+import { PaymentModule } from '@/modules/payment/payment.module';
 
 @Module({
   imports: [
     DatabaseModule,
-    UsersModule,
     AuthModule,
     BoilerPartsModule,
     ShoppingCartModule,

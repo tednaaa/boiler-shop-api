@@ -1,10 +1,11 @@
 import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { useContainer } from 'class-validator';
 import * as passport from 'passport';
 import * as session from 'express-session';
 
-import { isProductionEnviroment } from './shared/is-production-enviroment';
-import { useContainer } from 'class-validator';
+import { isProductionEnviroment } from '@/shared/lib/is-production-enviroment';
+
 import { AppModule } from './app.module';
 
 export const setup = (app: INestApplication): INestApplication => {

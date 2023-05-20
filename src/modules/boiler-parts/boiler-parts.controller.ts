@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { AuthenticatedGuard } from '../auth/authenticated.guard';
+import { AuthenticatedGuard } from '../auth/guards/authenticated.guard';
 import { BoilerPartsService } from './boiler-parts.service';
 import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
 import {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../users [draft]/users.service';
 import { BoilerPartsService } from '../boiler-parts/boiler-parts.service';
 
 import { ShoppingCart } from './shopping-cart.model';

@@ -15,6 +15,8 @@ class UserDto {
 }
 
 describe('IsUserAlreadyExistEmail', () => {
+  const alreadyExistEmail = 'test-already@test.com';
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [IsUserAlreadyExistEmail],
@@ -23,8 +25,8 @@ describe('IsUserAlreadyExistEmail', () => {
         return createMock<typeof User>({
           findOne: jest
             .fn()
-            .mockImplementation((options: { where: { email: string } }) => {
-              if (options.where.email === 'already-exists@test.com') {
+            .mockImplementation((options: { where: UserDto }) => {
+              if (options.where.email === alreadyExistEmail) {
                 return createMock<User>();
               }
             }),
@@ -36,7 +38,7 @@ describe('IsUserAlreadyExistEmail', () => {
   });
 
   it.each([
-    ['already-exists@test.com', 1],
+    [alreadyExistEmail, 1],
     ['another@example.com', 0],
   ])(
     'should validate whether the user already exist by their email',

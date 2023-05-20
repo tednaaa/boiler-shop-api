@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { UsersModule } from '../users/users.module';
+import { UsersModule } from '../users [draft]/users.module';
 import { BoilerPartsModule } from '../boiler-parts/boiler-parts.module';
 
 import { ShoppingCartController } from './shopping-cart.controller';

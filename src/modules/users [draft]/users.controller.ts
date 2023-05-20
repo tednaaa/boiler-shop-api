@@ -10,8 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { LocalAuthGuard } from '../auth/local-auth.guard';
-import { AuthenticatedGuard } from '../auth/authenticated.guard';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
+import { AuthenticatedGuard } from '../auth/guards/authenticated.guard';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
