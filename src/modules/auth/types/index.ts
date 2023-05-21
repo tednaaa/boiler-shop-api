@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class LoginUserRequest {
+export class LoginRequest {
   @ApiProperty({ example: 'Bob' })
   username: string;
 
@@ -8,7 +8,7 @@ export class LoginUserRequest {
   password: string;
 }
 
-export class LoginUserResponse {
+export class LoginResponse {
   @ApiProperty({
     example: {
       userId: 1,
@@ -26,12 +26,12 @@ export class LoginUserResponse {
   message: string;
 }
 
-export class LogoutUserResponse {
+export class LogoutResponse {
   @ApiProperty({ example: 'Session has ended' })
   message: string;
 }
 
-export class LoginCheckResponse {
+export class MeResponse {
   @ApiProperty({ example: 1 })
   userId: number;
 

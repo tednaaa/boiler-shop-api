@@ -5,7 +5,7 @@ import {
   SequelizeOptionsFactory,
 } from '@nestjs/sequelize';
 
-import { User } from '../users [draft]/users.model';
+import { User } from '../user/user.model';
 
 @Injectable()
 export class SequelizeConfigService implements SequelizeOptionsFactory {

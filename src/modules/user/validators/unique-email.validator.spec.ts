@@ -2,8 +2,8 @@ import { useContainer, validate, Validate } from 'class-validator';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { createMock } from '@golevelup/ts-jest';
 
-import { IsUserAlreadyExistEmail } from './is-user-already-exists-email.validator';
-import { User } from '../users.model';
+import { UniqueEmailValidator } from './unique-email.validator';
+import { User } from '../user.model';
 
 class UserDto {
   @Validate(IsUserAlreadyExistEmail)
@@ -19,7 +19,7 @@ describe('IsUserAlreadyExistEmail', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [IsUserAlreadyExistEmail],
+      providers: [UniqueEmailValidator],
     })
       .useMocker(() => {
         return createMock<typeof User>({
