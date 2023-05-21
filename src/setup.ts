@@ -22,6 +22,7 @@ export const setup = (app: INestApplication): INestApplication => {
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
+      store: new session.MemoryStore(),
       cookie: {
         httpOnly: true,
         signed: true,

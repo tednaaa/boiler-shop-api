@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
-import { UsersService } from '../users [draft]/users.service';
 import { BoilerPartsService } from '../boiler-parts/boiler-parts.service';
 
 import { ShoppingCart } from './shopping-cart.model';
 import { AddToCartDto } from './dto/add-to-cart.dto';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class ShoppingCartService {
   constructor(
-    @InjectModel(ShoppingCart) private shoppingCartModel: typeof ShoppingCart,
-    private readonly usersService: UsersService,
+    @InjectModel(ShoppingCart)
+    private readonly shoppingCartModel: typeof ShoppingCart,
+    private readonly userService: UserService,
     private readonly boilerPartsService: BoilerPartsService,
   ) {}
 
@@ -21,10 +22,7 @@ export class ShoppingCartService {
 
   async add(addToCartDto: AddToCartDto) {
     const cart = new ShoppingCart();
-    const user = await this.usersService.findOne({
-      where: { username: addToCartDto.username },
-    });
-
+    const user = await this.userService.findByUsername(addToCartDto.username);
     const part = await this.boilerPartsService.findOne(addToCartDto.partId);
 
     cart.userId = user.id;
