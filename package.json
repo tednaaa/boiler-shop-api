@@ -88,6 +88,9 @@
       "<rootDir>/main.ts",
       "<rootDir>/setup.ts"
     ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
