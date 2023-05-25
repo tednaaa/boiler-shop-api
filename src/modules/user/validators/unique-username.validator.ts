@@ -17,6 +17,6 @@ export class UniqueUsernameValidator implements ValidatorConstraintInterface {
   }
 
   defaultMessage(): string {
-    return 'The username «$value» is already register.';
+    return 'The username «$value» is already registered.';
   }
 }
