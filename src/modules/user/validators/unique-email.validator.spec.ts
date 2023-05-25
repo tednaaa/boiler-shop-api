@@ -1,51 +1,56 @@
-import { useContainer, validate, Validate } from 'class-validator';
-import { Test, type TestingModule } from '@nestjs/testing';
-import { createMock } from '@golevelup/ts-jest';
-
-import { UniqueEmailValidator } from './unique-email.validator';
+import { UserService } from '../user.service';
+import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '../user.model';
+import { createMock } from '@golevelup/ts-jest';
+import { UniqueEmailValidator } from './unique-email.validator';
 
-class UserDto {
-  @Validate(IsUserAlreadyExistEmail)
-  readonly email: string;
-
-  constructor(email: string) {
-    this.email = email;
-  }
-}
-
-describe('IsUserAlreadyExistEmail', () => {
-  const alreadyExistEmail = 'test-already@test.com';
+describe('UniqueEmailValidator', () => {
+  let uniqueEmailValidator: UniqueEmailValidator;
+  let userService: UserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [UniqueEmailValidator],
     })
-      .useMocker(() => {
-        return createMock<typeof User>({
-          findOne: jest
-            .fn()
-            .mockImplementation((options: { where: UserDto }) => {
-              if (options.where.email === alreadyExistEmail) {
-                return createMock<User>();
-              }
-            }),
-        });
-      })
+      .useMocker(createMock)
       .compile();
 
-    useContainer(module, { fallbackOnErrors: true });
+    userService = module.get<UserService>(UserService);
+    uniqueEmailValidator =
+      module.get<UniqueEmailValidator>(UniqueEmailValidator);
   });
 
-  it.each([
-    [alreadyExistEmail, 1],
-    ['another@example.com', 0],
-  ])(
-    'should validate whether the user already exist by their email',
-    async (email, errorsCount) => {
-      const user = new UserDto(email);
+  describe('validate', () => {
+    it('should return true when username is unique', async () => {
+      const email = 'test@test.com';
 
-      await expect(validate(user)).resolves.toHaveLength(errorsCount);
-    },
-  );
+      jest.spyOn(userService, 'findByEmail').mockResolvedValueOnce(null);
+
+      const result = await uniqueEmailValidator.validate(email);
+
+      expect(result).toBe(true);
+      expect(userService.findByEmail).toHaveBeenCalledWith(email);
+    });
+
+    it('should return false when username is already registered', async () => {
+      const email = 'test@test.com';
+
+      jest
+        .spyOn(userService, 'findByEmail')
+        .mockResolvedValueOnce({ email } as User);
+
+      const result = await uniqueEmailValidator.validate(email);
+
+      expect(result).toBe(false);
+      expect(userService.findByEmail).toHaveBeenCalledWith(email);
+    });
+  });
+
+  describe('defaultMessage', () => {
+    it('should return the default error message', () => {
+      const defaultMessage = uniqueEmailValidator.defaultMessage();
+
+      expect(defaultMessage).toBe('The email «$value» is already registered.');
+    });
+  });
 });

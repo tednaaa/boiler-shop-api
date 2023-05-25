@@ -18,6 +18,6 @@ export class UniqueEmailValidator implements ValidatorConstraintInterface {
   }
 
   defaultMessage(): string {
-    return 'The email «$value» is already register.';
+    return 'The email «$value» is already registered.';
   }
 }
