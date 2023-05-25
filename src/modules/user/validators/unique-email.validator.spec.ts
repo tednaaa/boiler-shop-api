@@ -1,7 +1,8 @@
-import { UserService } from '../user.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '../user.model';
 import { createMock } from '@golevelup/ts-jest';
+
+import { UserService } from '../user.service';
+import { User } from '../user.model';
 import { UniqueEmailValidator } from './unique-email.validator';
 
 describe('UniqueEmailValidator', () => {
@@ -29,7 +30,7 @@ describe('UniqueEmailValidator', () => {
       const result = await uniqueEmailValidator.validate(email);
 
       expect(result).toBe(true);
-      expect(userService.findByEmail).toHaveBeenCalledWith(email);
+      expect(userService.findByEmail).toBeCalledWith(email);
     });
 
     it('should return false when username is already registered', async () => {
@@ -42,7 +43,7 @@ describe('UniqueEmailValidator', () => {
       const result = await uniqueEmailValidator.validate(email);
 
       expect(result).toBe(false);
-      expect(userService.findByEmail).toHaveBeenCalledWith(email);
+      expect(userService.findByEmail).toBeCalledWith(email);
     });
   });
 

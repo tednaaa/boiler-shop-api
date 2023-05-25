@@ -1,8 +1,9 @@
-import { UserService } from '../user.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniqueUsernameValidator } from './unique-username.validator';
-import { User } from '../user.model';
 import { createMock } from '@golevelup/ts-jest';
+
+import { UserService } from '../user.service';
+import { User } from '../user.model';
+import { UniqueUsernameValidator } from './unique-username.validator';
 
 describe('UniqueUsernameValidator', () => {
   let uniqueUsernameValidator: UniqueUsernameValidator;
@@ -30,7 +31,7 @@ describe('UniqueUsernameValidator', () => {
       const result = await uniqueUsernameValidator.validate(username);
 
       expect(result).toBe(true);
-      expect(userService.findByUsername).toHaveBeenCalledWith(username);
+      expect(userService.findByUsername).toBeCalledWith(username);
     });
 
     it('should return false when username is already registered', async () => {
@@ -43,7 +44,7 @@ describe('UniqueUsernameValidator', () => {
       const result = await uniqueUsernameValidator.validate(username);
 
       expect(result).toBe(false);
-      expect(userService.findByUsername).toHaveBeenCalledWith(username);
+      expect(userService.findByUsername).toBeCalledWith(username);
     });
   });
 
