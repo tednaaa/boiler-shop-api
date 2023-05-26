@@ -21,21 +21,22 @@ export class ShoppingCartService {
   }
 
   async add(addToCartDto: AddToCartDto) {
-    const cart = new ShoppingCart();
     const user = await this.userService.findByUsername(addToCartDto.username);
     const part = await this.boilerPartsService.findOne(addToCartDto.partId);
 
-    cart.userId = user.id;
-    cart.partId = part.id;
-    cart.boiler_manufacturer = part.boiler_manufacturer;
-    cart.parts_manufacturer = part.parts_manufacturer;
-    cart.price = part.price;
-    cart.name = part.name;
-    cart.image = JSON.parse(part.images)[0];
-    cart.in_stock = part.in_stock;
-    cart.total_price = part.price;
+    const cart = await this.shoppingCartModel.create({
+      userId: user.id,
+      partId: part.id,
+      boiler_manufacturer: part.boiler_manufacturer,
+      parts_manufacturer: part.parts_manufacturer,
+      price: part.price,
+      name: part.name,
+      image: JSON.parse(part.images)[0],
+      in_stock: part.in_stock,
+      total_price: part.price,
+    });
 
-    return cart.save();
+    return cart;
   }
 
   async updateCount(
