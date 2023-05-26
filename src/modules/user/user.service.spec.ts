@@ -32,9 +32,9 @@ describe('UserService', () => {
         id: 1,
         email,
         username: 'testuser',
-      };
+      } as User;
 
-      jest.spyOn(userModel, 'findOne').mockResolvedValueOnce(user as User);
+      jest.spyOn(userModel, 'findOne').mockResolvedValueOnce(user);
 
       const result = await userService.findByEmail(email);
 
@@ -61,9 +61,9 @@ describe('UserService', () => {
         id: 1,
         email: 'test@example.com',
         username,
-      };
+      } as User;
 
-      jest.spyOn(userModel, 'findOne').mockResolvedValueOnce(user as User);
+      jest.spyOn(userModel, 'findOne').mockResolvedValueOnce(user);
 
       const result = await userService.findByUsername(username);
 
