@@ -1,3 +1,5 @@
+### [Frontend repo](https://github.com/tednaaa/boiler-shop)
+
 # Init project
 
 > Check requirments in .tool-versions (asdf)
