@@ -1,4 +1,4 @@
-### [Frontend repo](https://github.com/tednaaa/boiler-shop)
+### [Frontend repo](https://github.com/tednaaa/boiler-store)
 
 # Init project
 
