@@ -35,7 +35,7 @@ export const setup = (app: INestApplication): INestApplication => {
   app.use(passport.session());
 
   const config = new DocumentBuilder()
-    .setTitle('Boiler Shop API')
+    .setTitle('API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
